@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!--  /WEB-INF/decorators.xml -->
+<decorators defaultdir="/layout">
+<decorator name="main" page="layout.jsp">
+<pattern>*.shop</pattern>
+</decorator>
+
+<excludes>
+</excludes>
+</decorators>
