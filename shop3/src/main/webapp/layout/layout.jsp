@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title><decorator:title /></title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
+<script type="text/javascript" src="http://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 <decorator:head />
 <link rel="styleSheet" href="${path }/css/main.css">
 </head>

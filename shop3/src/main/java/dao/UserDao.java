@@ -69,8 +69,31 @@ public class UserDao {
 		 return template.query("select * from useraccount where userid not like 'admin' ",mapper);
 		
 	}
-	
 
+
+	public List<User> userList(String[] idchks) {
+		//select * from useraccount where user id in('test1','tset3')
+		
+		String sql="select * from useraccount where userid in(";
+		for(int i= 0 ; i< idchks.length ;i++) {
+			sql+="'";
+			String a = idchks[i];
+			sql+=a+"'";
+			if(i!=idchks.length-1) sql+=","; 
+		}
+		sql+= ")";
+		System.out.println(sql);
+		
+//		String ids="";
+//		for(int i = 0 ; i<idchks.length ;i++) {
+//			ids +="'" + idchks[i]+ ((i==idchks.length-1)?"'":",");
+//		}
+//		String sql ="select * from useraccount where userid in(" + ids+")";
+//		
+//		
+		
+		return template.query(sql,mapper);
+	}
 	
 	
 }

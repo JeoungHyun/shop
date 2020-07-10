@@ -1,6 +1,7 @@
 package logic;
 
 import java.io.File;
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.BoardDao;
 import dao.ItemDao;
 import dao.SaleDao;
 import dao.SaleItemDao;
@@ -25,6 +27,8 @@ public class ShopService {
 	private SaleDao saleDao;
 	@Autowired
 	private SaleItemDao saleItemDao;
+	@Autowired
+	private BoardDao boardDao;
 	
 	public List<Item> getItemList() {
 		return itemDao.list();
@@ -48,7 +52,7 @@ public class ShopService {
 		String orgFile = picture.getOriginalFilename();
 		String uploadPath=request.getServletContext().getRealPath("/")+path;
 		File fpath= new File(uploadPath);
-		if(!fpath.exists()) fpath.mkdir();
+		if(!fpath.exists()) fpath.mkdirs();
 		try {
 			//파일의 내용을 실제 파일로 저장
 			picture.transferTo(new File(uploadPath + orgFile));
@@ -135,8 +139,24 @@ public class ShopService {
 		
 	}
 
+	public List<User> userList(String[] idchks) {
+		return userDao.userList(idchks);
+	}
+
 	public List<User> userList() {
 		return userDao.userList();
+	}
+
+	public void boardWrite(Board board, HttpServletRequest request) {
+		if(board.getFile1() != null && !board.getFile1().isEmpty()) {
+			uploadFileCreate(board.getFile1(), request, "board/file/");
+			board.setfileurl(board.getFile1().getOriginalFilename());
+		}
+		int max=boardDao.maxnum();
+		board.setNum(++max);
+		board.setGrp(max);
+		boardDao.insert(board);
+		
 	}
 
 }

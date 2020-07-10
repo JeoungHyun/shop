@@ -44,6 +44,7 @@
 			<value>
 				Exception.CartEmptyException=exception
 				Exception.LoginException=exception
+				Exception.BoradException=exception
 			</value>
 		</property>
 	</bean>
